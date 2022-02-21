@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/show_neighbour_activity_coordinator_layout"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_picture_header"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@id/toolbar">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/show_neighbour_activity_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_picture_header"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@string/activity_show_neighbour_avatar"
+                    app:srcCompat="@drawable/ic_account"
+                    app:layout_collapseMode="parallax"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/show_neighbour_activity_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/show_neighbour_activity_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/fab_margin"
+        app:layout_anchor="@id/appbar_container"
+        app:layout_anchorGravity="bottom|end"
+        app:fabSize="normal"
+        android:contentDescription="@string/activity_show_neighbour_favorite"
+        android:src="@drawable/ic_star_border_white_24dp"
+        android:tint="@color/colorFavorite"
+        app:behavior_autoHide="false"
+        app:backgroundTint="@color/colorBackgroundLight" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/show_neighbour_activity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
+        android:fillViewport="true">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/colorBackground"
+            tools:context=".ui.neighbour_list.ShowNeighbourActivity">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/show_neighbour_activity_info_card"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="0dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_margin="@dimen/card_margin"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/card_radius"
+                app:cardElevation="@dimen/card_elevation"
+                android:background="@color/colorCard">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/show_neighbour_activity_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/card_padding"
+                        android:paddingLeft="@dimen/card_padding"
+                        android:paddingRight="@dimen/card_padding"
+                        android:layout_marginBottom="@dimen/card_title_margin_bottom"
+                        android:textSize="@dimen/card_title"
+                        android:textColor="@color/colorCardTitle"
+                        tools:text="Nom"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorBackground"/>
+
+                    <TextView
+                        android:id="@+id/show_neighbour_activity_adress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:drawableStart="@drawable/ic_baseline_place_24"
+                        android:drawablePadding="@dimen/card_padding"
+                        android:paddingLeft="@dimen/card_padding"
+                        android:paddingRight="@dimen/card_padding"
+                        android:layout_marginTop="@dimen/card_padding"
+                        android:layout_marginBottom="@dimen/card_padding"
+                        tools:text="Adresse" />
+
+                    <TextView
+                        android:id="@+id/show_neighbour_activity_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="@dimen/card_padding"
+                        android:paddingRight="@dimen/card_padding"
+                        android:layout_marginBottom="@dimen/card_padding"
+                        android:drawableStart="@drawable/ic_baseline_phone_24"
+                        android:drawablePadding="@dimen/card_padding"
+                        tools:text="Téléphone"/>
+
+                    <TextView
+                        android:id="@+id/show_neighbour_activity_website"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="@dimen/card_padding"
+                        android:paddingRight="@dimen/card_padding"
+                        android:layout_marginBottom="@dimen/card_padding"
+                        android:drawableStart="@drawable/ic_baseline_language_24"
+                        android:drawablePadding="@dimen/card_padding"
+                        tools:text="Site internet"/>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/show_neighbour_activity_about_card"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/show_neighbour_activity_info_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/card_margin"
+                app:cardCornerRadius="@dimen/card_radius"
+                app:cardElevation="@dimen/card_elevation"
+                android:background="@color/colorCard">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/card_padding"
+                        android:layout_marginBottom="@dimen/card_title_margin_bottom"
+                        android:paddingLeft="@dimen/card_padding"
+                        android:paddingRight="@dimen/card_padding"
+                        android:text="@string/activity_show_neighbour_about"
+                        android:textColor="@color/colorCardTitle"
+                        android:textSize="@dimen/card_title" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorBackground" />
+
+                    <TextView
+                        android:id="@+id/show_neighbour_activity_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/card_padding"
+                        android:layout_marginBottom="@dimen/card_padding"
+                        android:paddingLeft="@dimen/card_padding"
+                        android:paddingRight="@dimen/card_padding"
+                        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

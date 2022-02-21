@@ -1,6 +1,7 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -13,8 +14,10 @@ import android.view.ViewGroup;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
+import com.openclassrooms.entrevoisins.events.ShowNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
+
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -26,15 +29,20 @@ public class NeighbourFragment extends Fragment {
 
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
+    private List<Neighbour> mfavoritesNeighbours;
     private RecyclerView mRecyclerView;
+    private static final String KEY_POSITION = "position";
 
 
     /**
      * Create and return a new instance
      * @return @{@link NeighbourFragment}
      */
-    public static NeighbourFragment newInstance() {
+    public static NeighbourFragment newInstance(int position) {
         NeighbourFragment fragment = new NeighbourFragment();
+        Bundle args = new Bundle();
+        args.putInt(KEY_POSITION, position);
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -59,8 +67,16 @@ public class NeighbourFragment extends Fragment {
      * Init the List of neighbours
      */
     private void initList() {
-        mNeighbours = mApiService.getNeighbours();
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
+        int position = getArguments().getInt(KEY_POSITION, -1);
+
+        if (position == 0) {
+            mNeighbours = mApiService.getNeighbours();
+            mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
+
+        } else if (position == 1) {
+            mfavoritesNeighbours = mApiService.getFavoriteNeighbours();
+            mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mfavoritesNeighbours));
+        }
     }
 
     @Override
@@ -79,6 +95,13 @@ public class NeighbourFragment extends Fragment {
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onShowNeighbour(ShowNeighbourEvent event) {
+        Intent intent = new Intent(getActivity(), ShowNeighbourActivity.class);
+        intent.putExtra("neighbour", event.neighbour);
+        startActivity(intent);
     }
 
     /**
