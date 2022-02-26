@@ -50,7 +50,6 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(null, "show Neighbour");
                 EventBus.getDefault().post(new ShowNeighbourEvent(neighbour));
             }
         });

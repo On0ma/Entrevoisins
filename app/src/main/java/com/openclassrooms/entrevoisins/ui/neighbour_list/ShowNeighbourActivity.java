@@ -78,8 +78,9 @@ public class ShowNeighbourActivity extends AppCompatActivity {
         boolean isFavorite = neighbour.getIsFavorite();
 
         if (isFavorite) {
-            Log.d(null, "favori");
             favoriteBtn.setImageResource(R.drawable.ic_star_white_24dp);
+        } else {
+            favoriteBtn.setImageResource(R.drawable.ic_star_border_white_24dp);
         }
 
         favoriteBtn.setOnClickListener(new View.OnClickListener() {
